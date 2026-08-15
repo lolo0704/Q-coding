@@ -1,14 +1,13 @@
 /**
- * Moteur Q-Coding v1.5 (Harnais Cognitif de Développement — 100% Encapsulé)
+ * Moteur Q-Coding v1.6 (Harnais Cognitif de Développement — 100% Encapsulé)
  *
  * Principes :
  * - Vanilla JS 100% autonome, zéro dépendance externe.
  * - Zéro fuite DOM / CSS : Tous les éléments (y compris le tooltip flottant) restent confinés sous `#qc-conteneur-global`.
- * - Intégration plug-and-play dans n'importe quel conteneur (div, onglet, modal, split-view).
+ * - Intégration plug-and-play dans n'importe quel conteneur (div, onglet, modal, split-view), en mode standalone ou embarqué.
  * - Barre latérale gauche (290px -> 58px) : Pistes & Refactorings en Attente [ad].
  * - Zone principale droite : Cap technique, Exigences [req], Bugs & Régressions [bug], Architecture [arch].
  */
-
 (function () {
   'use strict';
 
@@ -31,7 +30,6 @@
       --qc-violet: #c084fc;
       --qc-largeur-barre: 290px;
       --qc-largeur-barre-reduite: 58px;
-
       width: 100%;
       height: 100%;
       min-height: 380px;
@@ -44,7 +42,6 @@
       overflow: hidden;
       text-align: left;
     }
-
     #qc-conteneur-global *,
     #qc-conteneur-global *::before,
     #qc-conteneur-global *::after {
@@ -67,12 +64,10 @@
       flex-shrink: 0;
       z-index: 10;
     }
-
     #qc-barre-laterale.repliee {
       width: var(--qc-largeur-barre-reduite);
       min-width: var(--qc-largeur-barre-reduite);
     }
-
     .qc-barre-entete {
       height: 48px;
       padding: 0 14px;
@@ -82,7 +77,6 @@
       justify-content: space-between;
       flex-shrink: 0;
     }
-
     .qc-barre-entete-gauche {
       display: flex;
       align-items: center;
@@ -90,7 +84,6 @@
       min-width: 0;
       overflow: hidden;
     }
-
     .qc-barre-titre {
       font-size: 11.5px;
       font-weight: 700;
@@ -99,7 +92,6 @@
       color: var(--qc-texte-atténué);
       white-space: nowrap;
     }
-
     .qc-compteur {
       background: rgba(251, 191, 36, 0.15);
       color: var(--qc-orange);
@@ -108,7 +100,6 @@
       border-radius: 999px;
       font-weight: 700;
     }
-
     .qc-bouton-repli {
       width: 24px;
       height: 24px;
@@ -123,21 +114,17 @@
       font-size: 11px;
       transition: background 0.15s ease, color 0.15s ease;
     }
-
     .qc-bouton-repli:hover {
       background: rgba(255, 255, 255, 0.08);
       color: var(--qc-texte);
     }
-
     #qc-barre-laterale.repliee .qc-barre-entete-gauche {
       display: none;
     }
-
     #qc-barre-laterale.repliee .qc-barre-entete {
       justify-content: center;
       padding: 0;
     }
-
     .qc-barre-liste {
       flex: 1;
       overflow-y: auto;
@@ -155,11 +142,9 @@
       overflow: hidden;
       transition: border-color 0.2s ease;
     }
-
     .qc-item-card.ouvert {
       border-color: var(--qc-orange);
     }
-
     .qc-item-entete {
       padding: 7px 9px;
       cursor: pointer;
@@ -169,7 +154,10 @@
       user-select: none;
       min-height: 36px;
     }
-
+    .qc-item-entete:focus-visible {
+      outline: 2px solid var(--qc-accent);
+      outline-offset: -2px;
+    }
     .qc-tag {
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 10px;
@@ -179,14 +167,12 @@
       flex-shrink: 0;
       display: inline-block;
     }
-
     .qc-tag-ad { background: rgba(251, 191, 36, 0.15); color: var(--qc-orange); }
     .qc-tag-req { background: rgba(192, 132, 252, 0.15); color: var(--qc-violet); }
     .qc-tag-arch { background: rgba(108, 158, 255, 0.15); color: var(--qc-accent); }
     .qc-tag-bug-ouvert { background: rgba(248, 113, 113, 0.15); color: var(--qc-rouge); }
     .qc-tag-bug-cours { background: rgba(251, 191, 36, 0.15); color: var(--qc-orange); }
     .qc-tag-bug-resolu { background: rgba(74, 222, 128, 0.15); color: var(--qc-vert); }
-
     .qc-item-titre {
       flex: 1;
       font-size: 11.5px;
@@ -194,7 +180,6 @@
       color: var(--qc-texte);
       line-height: 1.35;
     }
-
     .qc-item-corps {
       display: none;
       padding: 0 9px 8px;
@@ -203,11 +188,9 @@
       line-height: 1.45;
       border-top: 1px solid var(--qc-bordure);
     }
-
     .qc-item-card.ouvert .qc-item-corps {
       display: block;
     }
-
     .qc-item-corps p {
       margin-top: 5px;
     }
@@ -218,13 +201,11 @@
     #qc-barre-laterale.repliee .qc-item-card.ouvert .qc-item-corps {
       display: none !important;
     }
-
     #qc-barre-laterale.repliee .qc-item-entete {
       justify-content: center;
       padding: 5px 2px;
       min-height: 32px;
     }
-
     #qc-barre-laterale.repliee .qc-tag {
       width: 100%;
       text-align: center;
@@ -244,7 +225,6 @@
       gap: 16px;
       min-width: 0;
     }
-
     .qc-header-bloc h1 {
       font-size: 18px;
       font-weight: 800;
@@ -252,13 +232,11 @@
       margin-bottom: 4px;
       letter-spacing: -0.01em;
     }
-
     .qc-header-bloc p {
       font-size: 12.5px;
       color: var(--qc-texte-atténué);
       line-height: 1.45;
     }
-
     .qc-cap-box {
       background: var(--qc-accent-doux);
       border: 1px solid rgba(108, 158, 255, 0.3);
@@ -269,26 +247,22 @@
       gap: 10px;
       margin-top: 6px;
     }
-
     .qc-cap-icon {
       font-size: 16px;
       flex-shrink: 0;
     }
-
     .qc-cap-texte {
       font-size: 12.5px;
       font-weight: 600;
       color: var(--qc-accent);
       line-height: 1.35;
     }
-
     .qc-section {
       background: var(--qc-surface);
       border: 1px solid var(--qc-bordure);
       border-radius: 9px;
       padding: 12px 14px;
     }
-
     .qc-section h2 {
       font-size: 11.5px;
       font-weight: 700;
@@ -299,7 +273,6 @@
       align-items: center;
       gap: 6px;
     }
-
     .qc-ligne-elem {
       font-size: 12px;
       color: var(--qc-texte);
@@ -308,13 +281,11 @@
       padding-bottom: 8px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
-
     .qc-ligne-elem:last-child {
       margin-bottom: 0;
       padding-bottom: 0;
       border-bottom: none;
     }
-
     .qc-status-pill {
       font-size: 10px;
       font-weight: 700;
@@ -324,7 +295,6 @@
       text-transform: uppercase;
       display: inline-block;
     }
-
     .qc-status-resolu { background: rgba(74, 222, 128, 0.15); color: var(--qc-vert); }
     .qc-status-cours { background: rgba(251, 191, 36, 0.15); color: var(--qc-orange); }
     .qc-status-ouvert { background: rgba(248, 113, 113, 0.15); color: var(--qc-rouge); }
@@ -412,6 +382,7 @@
     const btnRepli = creerEl('button', 'qc-bouton-repli', '◀');
     btnRepli.id = 'qc-btn-repli';
     btnRepli.title = 'Réduire / Agrandir';
+    btnRepli.setAttribute('aria-label', 'Réduire ou agrandir la barre latérale');
     enteteBarre.appendChild(btnRepli);
     barre.appendChild(enteteBarre);
 
@@ -421,11 +392,27 @@
       data.aTraiter.forEach(ad => {
         const card = creerEl('div', 'qc-item-card');
         const entete = creerEl('div', 'qc-item-entete');
+        entete.setAttribute('role', 'button');
+        entete.setAttribute('tabindex', '0');
+        entete.setAttribute('aria-expanded', 'false');
+
         const tag = creerEl('span', 'qc-tag qc-tag-ad', ad.id || 'ad');
         tag.setAttribute('data-tooltip', `[${ad.id}] ${ad.titre || ''}`);
         entete.appendChild(tag);
         entete.appendChild(creerEl('span', 'qc-item-titre', ad.titre || ''));
-        entete.onclick = () => card.classList.toggle('ouvert');
+
+        const toggle = () => {
+          const ouvert = card.classList.toggle('ouvert');
+          entete.setAttribute('aria-expanded', String(ouvert));
+        };
+        entete.onclick = toggle;
+        entete.onkeydown = (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+          }
+        };
+
         card.appendChild(entete);
 
         if (ad.quand || ad.raison) {
@@ -434,6 +421,7 @@
           if (ad.raison) corps.appendChild(creerEl('p', '', `Raison : ${ad.raison}`));
           card.appendChild(corps);
         }
+
         listeBarre.appendChild(card);
       });
     } else {
@@ -459,6 +447,7 @@
     capBox.appendChild(creerEl('span', 'qc-cap-icon', '🎯'));
     capBox.appendChild(creerEl('div', 'qc-cap-texte', `CAP TECHNIQUE : ${data.cap || 'Non défini'}`));
     headerBloc.appendChild(capBox);
+
     principal.appendChild(headerBloc);
 
     // Section 1 : Exigences Intangibles [req]
@@ -472,9 +461,11 @@
         const ligne = creerEl('div', 'qc-ligne-elem');
         const tag = creerEl('span', 'qc-tag qc-tag-req', req.id || 'req');
         ligne.appendChild(tag);
+
         const titreFort = document.createElement('strong');
         titreFort.textContent = ` ${req.titre || ''}. `;
         ligne.appendChild(titreFort);
+
         if (req.raison) ligne.appendChild(document.createTextNode(req.raison + ' '));
         if (req.regle) {
           const em = document.createElement('em');
@@ -483,6 +474,7 @@
         }
         secReq.appendChild(ligne);
       });
+
       principal.appendChild(secReq);
     }
 
@@ -517,8 +509,10 @@
           if (bug.fix) p.textContent += `Fix : ${bug.fix}`;
           ligne.appendChild(p);
         }
+
         secBugs.appendChild(ligne);
       });
+
       principal.appendChild(secBugs);
     }
 
@@ -533,12 +527,15 @@
         const ligne = creerEl('div', 'qc-ligne-elem');
         const tag = creerEl('span', 'qc-tag qc-tag-arch', arch.id || 'arch');
         ligne.appendChild(tag);
+
         const titreFort = document.createElement('strong');
         titreFort.textContent = ` ${arch.titre || ''}. `;
         ligne.appendChild(titreFort);
+
         if (arch.raison) ligne.appendChild(document.createTextNode(arch.raison));
         secArch.appendChild(ligne);
       });
+
       principal.appendChild(secArch);
     }
 
@@ -570,7 +567,6 @@
         tooltipEl.style.display = 'block';
       }
     });
-
     listeBarre.addEventListener('mouseout', e => {
       if (e.target.closest('.qc-tag')) {
         tooltipEl.style.display = 'none';
@@ -581,16 +577,23 @@
   // Export global universel
   window.renderQCoding = renderQCoding;
 
-  // Auto-démarrage si le host existe déjà au chargement
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      if (document.getElementById('qc-app-host') && window.QCODING_DATA) {
-        renderQCoding('#qc-app-host');
-      }
-    }, { once: true });
-  } else {
-    if (document.getElementById('qc-app-host') && window.QCODING_DATA) {
+  /* ===========================================================
+     AUTO-DÉMARRAGE
+     La seule condition est la présence de window.QCODING_DATA :
+     renderQCoding crée lui-même le host '#qc-app-host' s'il n'existe
+     pas encore, ce qui couvre aussi bien le mode standalone que le
+     mode embarqué (aucun des deux templates ne pré-crée de host).
+     =========================================================== */
+  function autoDemarrer() {
+    if (window.QCODING_DATA) {
       renderQCoding('#qc-app-host');
     }
   }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoDemarrer, { once: true });
+  } else {
+    autoDemarrer();
+  }
+
 })();
