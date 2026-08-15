@@ -1,22 +1,22 @@
 /**
- * Moteur Q-Coding v1.1 (Harnais Cognitif de Développement)
+ * Moteur Q-Coding v1.5 (Harnais Cognitif de Développement — 100% Encapsulé)
  *
  * Principes :
  * - Vanilla JS 100% autonome, zéro dépendance externe.
- * - Données QCODING_DATA traitées de manière sécurisée (DOM createElement pur).
- * - Barre latérale gauche (290px -> 58px) : UNIQUEMENT les Pistes & Refactorings en Attente [ad].
- * - Zone principale droite : Cap technique [cap], Exigences [req], Bugs & Régressions [bug], Architecture [arch].
- * - Infobulle flottante au survol en mode replié.
+ * - Zéro fuite DOM / CSS : Tous les éléments (y compris le tooltip flottant) restent confinés sous `#qc-conteneur-global`.
+ * - Intégration plug-and-play dans n'importe quel conteneur (div, onglet, modal, split-view).
+ * - Barre latérale gauche (290px -> 58px) : Pistes & Refactorings en Attente [ad].
+ * - Zone principale droite : Cap technique, Exigences [req], Bugs & Régressions [bug], Architecture [arch].
  */
 
 (function () {
   'use strict';
 
   /* ===========================================================
-     STYLES CSS INJECTÉS
+     STYLES CSS STRICTEMENT SCOPÉS (AUCUNE POLLUTION DU SITE HÔTE)
      =========================================================== */
   const styles = `
-    :root {
+    #qc-conteneur-global {
       --qc-fond: #0b0d13;
       --qc-surface: #141720;
       --qc-surface-2: #1c212d;
@@ -31,30 +31,29 @@
       --qc-violet: #c084fc;
       --qc-largeur-barre: 290px;
       --qc-largeur-barre-reduite: 58px;
-    }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--qc-fond);
-      color: var(--qc-texte);
-      height: 100vh;
-      display: flex;
-      overflow: hidden;
-    }
-
-    #qc-conteneur-global {
       width: 100%;
       height: 100%;
+      min-height: 380px;
       display: flex;
-      overflow: hidden;
+      background: var(--qc-fond);
+      color: var(--qc-texte);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      box-sizing: border-box;
       position: relative;
+      overflow: hidden;
+      text-align: left;
     }
 
-    /* =========================================================
-       1. BARRE LATÉRALE (UNIQUEMENT PISTES & REFACTORINGS [ad])
-       ========================================================= */
+    #qc-conteneur-global *,
+    #qc-conteneur-global *::before,
+    #qc-conteneur-global *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 1. BARRE LATÉRALE [ad] */
     #qc-barre-laterale {
       width: var(--qc-largeur-barre);
       min-width: var(--qc-largeur-barre);
@@ -178,6 +177,7 @@
       padding: 2px 6px;
       border-radius: 4px;
       flex-shrink: 0;
+      display: inline-block;
     }
 
     .qc-tag-ad { background: rgba(251, 191, 36, 0.15); color: var(--qc-orange); }
@@ -232,9 +232,7 @@
       font-size: 9.5px;
     }
 
-    /* =========================================================
-       2. ZONE PRINCIPALE (CAP, REQ, BUGS, ARCH)
-       ========================================================= */
+    /* 2. ZONE PRINCIPALE (CAP, REQ, BUGS, ARCH) */
     #qc-principal {
       flex: 1;
       height: 100%;
@@ -324,16 +322,17 @@
       border-radius: 4px;
       margin-left: 6px;
       text-transform: uppercase;
+      display: inline-block;
     }
 
     .qc-status-resolu { background: rgba(74, 222, 128, 0.15); color: var(--qc-vert); }
     .qc-status-cours { background: rgba(251, 191, 36, 0.15); color: var(--qc-orange); }
     .qc-status-ouvert { background: rgba(248, 113, 113, 0.15); color: var(--qc-rouge); }
 
-    /* TOOLTIP FLOTTANT */
-    #qc-tooltip {
-      position: fixed;
-      z-index: 9999;
+    /* TOOLTIP FLOTTANT STRICTEMENT CONFINÉ DANS LE CONTENEUR */
+    #qc-conteneur-global #qc-tooltip {
+      position: absolute;
+      z-index: 1000;
       background: #1c212d;
       border: 1px solid var(--qc-accent);
       color: #ffffff;
@@ -345,6 +344,7 @@
       pointer-events: none;
       display: none;
       white-space: nowrap;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
   `;
 
@@ -364,12 +364,12 @@
   }
 
   /* ===========================================================
-     CONSTRUCTION DU DOM
+     FONCTION DE RENDU UNIVERSELLE & 100% ENCAPSULÉE
      =========================================================== */
-  function initialiserQCoding() {
+  function renderQCoding(cible, customData) {
     injecterCSS();
 
-    const data = window.QCODING_DATA || {
+    const data = customData || window.QCODING_DATA || {
       projet: { titre: "Projet de Code", description: "Session de développement" },
       cap: "Sprint initial",
       exigences: [],
@@ -378,7 +378,21 @@
       aTraiter: []
     };
 
-    const host = document.getElementById('qc-app-host') || document.body;
+    let host = null;
+    if (cible instanceof HTMLElement) {
+      host = cible;
+    } else if (typeof cible === 'string') {
+      host = document.querySelector(cible);
+    } else {
+      host = document.getElementById('qc-app-host');
+    }
+
+    if (!host) {
+      host = document.createElement('div');
+      host.id = 'qc-app-host';
+      document.body.appendChild(host);
+    }
+
     host.replaceChildren();
 
     const conteneurGlobal = creerEl('div', '');
@@ -450,8 +464,10 @@
     // Section 1 : Exigences Intangibles [req]
     if (Array.isArray(data.exigences) && data.exigences.length > 0) {
       const secReq = creerEl('div', 'qc-section');
-      secReq.appendChild(creerEl('h2', '', '🛡️ Exigences Intangibles (req)'));
-      secReq.querySelector('h2').style.color = 'var(--qc-violet)';
+      const h2 = creerEl('h2', '', '🛡️ Exigences Intangibles (req)');
+      h2.style.color = 'var(--qc-violet)';
+      secReq.appendChild(h2);
+
       data.exigences.forEach(req => {
         const ligne = creerEl('div', 'qc-ligne-elem');
         const tag = creerEl('span', 'qc-tag qc-tag-req', req.id || 'req');
@@ -473,8 +489,10 @@
     // Section 2 : Bugs & Régressions [bug]
     if (Array.isArray(data.bugs) && data.bugs.length > 0) {
       const secBugs = creerEl('div', 'qc-section');
-      secBugs.appendChild(creerEl('h2', '', '🐛 Bugs & Régressions (bug)'));
-      secBugs.querySelector('h2').style.color = 'var(--qc-rouge)';
+      const h2 = creerEl('h2', '', '🐛 Bugs & Régressions (bug)');
+      h2.style.color = 'var(--qc-rouge)';
+      secBugs.appendChild(h2);
+
       data.bugs.forEach(bug => {
         const ligne = creerEl('div', 'qc-ligne-elem');
         const statut = bug.statut || 'ouvert';
@@ -507,8 +525,10 @@
     // Section 3 : Architecture Actée [arch]
     if (Array.isArray(data.architecture) && data.architecture.length > 0) {
       const secArch = creerEl('div', 'qc-section');
-      secArch.appendChild(creerEl('h2', '', '🔵 Décisions d\'Architecture (arch)'));
-      secArch.querySelector('h2').style.color = 'var(--qc-accent)';
+      const h2 = creerEl('h2', '', '🔵 Décisions d\'Architecture (arch)');
+      h2.style.color = 'var(--qc-accent)';
+      secArch.appendChild(h2);
+
       data.architecture.forEach(arch => {
         const ligne = creerEl('div', 'qc-ligne-elem');
         const tag = creerEl('span', 'qc-tag qc-tag-arch', arch.id || 'arch');
@@ -522,16 +542,14 @@
       principal.appendChild(secArch);
     }
 
+    // 3. TOOLTIP FLOTTANT INTERNE (CONFINÉ DANS LE CONTENEUR GLOBAL)
+    const tooltipEl = creerEl('div', '');
+    tooltipEl.id = 'qc-tooltip';
+    conteneurGlobal.appendChild(tooltipEl);
+
+    // Injection dans le DOM hôte
     conteneurGlobal.appendChild(principal);
     host.appendChild(conteneurGlobal);
-
-    // Tooltip flottant
-    let tooltipEl = document.getElementById('qc-tooltip');
-    if (!tooltipEl) {
-      tooltipEl = creerEl('div', '');
-      tooltipEl.id = 'qc-tooltip';
-      document.body.appendChild(tooltipEl);
-    }
 
     // Événements de repli
     btnRepli.onclick = () => {
@@ -539,15 +557,16 @@
       btnRepli.textContent = repliee ? '▶' : '◀';
     };
 
-    // Survol pour tooltip en mode replié
+    // Survol pour tooltip en mode replié (coordonnées relatives au conteneur)
     listeBarre.addEventListener('mouseover', e => {
       if (!barre.classList.contains('repliee')) return;
       const tag = e.target.closest('.qc-tag');
       if (tag && tag.hasAttribute('data-tooltip')) {
         const rect = tag.getBoundingClientRect();
+        const conteneurRect = conteneurGlobal.getBoundingClientRect();
         tooltipEl.textContent = tag.getAttribute('data-tooltip');
-        tooltipEl.style.left = (rect.right + 8) + 'px';
-        tooltipEl.style.top = (rect.top + 2) + 'px';
+        tooltipEl.style.left = (rect.right - conteneurRect.left + 8) + 'px';
+        tooltipEl.style.top = (rect.top - conteneurRect.top + 2) + 'px';
         tooltipEl.style.display = 'block';
       }
     });
@@ -559,12 +578,19 @@
     });
   }
 
-  // Démarrage
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initialiserQCoding, { once: true });
-  } else {
-    initialiserQCoding();
-  }
+  // Export global universel
+  window.renderQCoding = renderQCoding;
 
-  window.renderQCoding = initialiserQCoding;
+  // Auto-démarrage si le host existe déjà au chargement
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('qc-app-host') && window.QCODING_DATA) {
+        renderQCoding('#qc-app-host');
+      }
+    }, { once: true });
+  } else {
+    if (document.getElementById('qc-app-host') && window.QCODING_DATA) {
+      renderQCoding('#qc-app-host');
+    }
+  }
 })();
