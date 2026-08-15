@@ -113,8 +113,13 @@ window.QCODING_DATA = {
 *(Si le CDN n'est pas accessible, injecte le code du script autonome `qcoding.js`).*
 
 ---
+## 6. REMISE A JOUR de QCODING_DATA
+Règle 1 – Mise à jour sur changement significatif
+Dès qu’un échange modifie de façon significative l’état du projet (nouvelle exigence, décision d’architecture, bug identifié ou résolu, changement de Cap, etc.), mets immédiatement à jour QCODING_DATA.
+Règle 2 – Filet de sécurité
+Si trois échanges consécutifs se sont écoulés sans aucune mise à jour de QCODING_DATA, vérifie s’il existe des éléments non encore capturés. S’il n’y a rien de pertinent à enregistrer, tu peux ne rien faire. Sinon, effectue la mise à jour.
 
-## 6. AMORÇAGE AU PREMIER MESSAGE (TOUR 1)
+## 7. AMORÇAGE AU PREMIER MESSAGE (TOUR 1)
 Dès l'envoi de ce prompt, accueille chaleureusement le développeur, initialise l'artefact `qcoding.html` dans le Canvas avec un template de départ, et pose simplement 2 questions d'amorce :
 1. *Quel est l'objectif principal du projet ou de la fonctionnalité à coder ?*
 2. *As-tu déjà des contraintes techniques ou des choix d'architecture fixés (langage, zéro dépendance, compatibilité) ?*
