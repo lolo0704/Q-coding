@@ -1,12 +1,12 @@
 # Q-Coding
 
-Ne laissez pas votre IA oublier pourquoi votre code fait ce qu’il fait.
+**Ne laissez pas votre IA oublier pourquoi votre code fait ce qu’il fait.**
 
-Q-Coding garde la trace de vos choix structurants à l’intérieur du projet en observant la conversation et en maintenant une mémoire structurée du projet (dans `window.QCODING_DATA`).
+Q-Coding garde la trace de vos choix structurants à l’intérieur du projet.  
+Il observe la conversation et maintient une mémoire structurée (`window.QCODING_DATA`).
 
-Q-coding est un harnais de développement "in-context" conçu pour être utilisé directement dans une conversation avec une IA en ligne et est activé par un simple prompt. L'outil se lance alors dans l'espace de travail (canvas) de l'IA. 
-
-Compatible avec ChatGPT, Claude, Gemini, Grok
+Harnais de développement *in-context*, activé par un simple prompt.  
+Compatible avec **ChatGPT, Claude, Gemini et Grok**.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -14,7 +14,8 @@ Compatible avec ChatGPT, Claude, Gemini, Grok
 
 ## Philosophie
 
-Q-Coding **observe** et mémorise les échanges avec l'IA afin de consolider le projet.  
+Q-Coding **observe** et mémorise les échanges avec l’IA afin de consolider le projet.
+
 Il capture ce qui a été dit (exigences, bugs, décisions d’architecture, pistes différées) et le structure dans un dashboard clair.  
 Le développeur reste entièrement responsable de ses choix.
 
@@ -29,7 +30,7 @@ Le développeur reste entièrement responsable de ses choix.
   - `[ad]` → Pistes et refactorings différés
 - Dashboard visuel moderne (Vanilla JS, zéro dépendance)
 - Deux modes d’intégration :
-  - **Embarqué** : tout dans un seul fichier HTML
+  - **Embarqué** : tout dans un seul fichier HTML (recommandé)
   - **Standalone** : dashboard séparé
 - IDs stables pour référencer facilement les éléments (`req1`, `bug2`…)
 - CSS strictement scopé (aucune pollution de la page hôte)
@@ -39,24 +40,4 @@ Le développeur reste entièrement responsable de ses choix.
 ## Démarrage rapide
 
 1. Copie le contenu de [`prompt.txt`](prompt.txt) dans ton IA.
-2. Le dashboard se met à jour automatiquement au fil de la conversation.
-
-### Mode embarqué (recommandé pour HTML autonome)
-
-```html
-<!-- QCODING:START -->
-<script>
-  window.QCODING_DATA = {
-    projet: {
-      titre: "Mon projet",
-      description: "Description courte"
-    },
-    cap: "Action en cours…",
-    exigences: [],
-    bugs: [],
-    architecture: [],
-    aTraiter: []
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/gh/lolo0704/Q-coding/qcoding.js"></script>
-<!-- QCODING:END -->
+2. Le dashboard se met à jour automatiquement au fil de la conversation. QCODING:END -->
