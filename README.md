@@ -40,4 +40,4 @@ Le développeur reste entièrement responsable de ses choix.
 ## Démarrage rapide
 
 1. Copie le contenu de [`prompt.txt`](prompt.txt) dans ton IA.
-2. Le dashboard se met à jour automatiquement au fil de la conversation. QCODING:END -->
+2. Le dashboard se met à jour automatiquement au fil de la conversation.
