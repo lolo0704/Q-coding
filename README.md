@@ -29,7 +29,8 @@ Le développeur reste entièrement responsable de ses choix.
   - `[arch]` → Décisions d’architecture
   - `[ad]` → Pistes et refactorings différés
 - Dashboard visuel moderne (Vanilla JS, zéro dépendance)
-- Q-Coding est intégré au fichier HTML vibe codé
+- Intégration directe dans le fichier HTML de l’application
+- Bouton visible « QCoding » pour afficher / masquer le dashboard
 - IDs stables pour référencer facilement les éléments (`req1`, `bug2`…)
 - CSS strictement scopé (aucune pollution de la page hôte)
 
@@ -38,11 +39,15 @@ Le développeur reste entièrement responsable de ses choix.
 ## Démarrage rapide
 
 1. Copie le contenu de [`prompt.txt`](prompt.txt) dans ton IA.
-2. Le dashboard se met à jour automatiquement au fil de la conversation.
+2. L’IA intègre automatiquement Q-Coding dans ton fichier HTML (bloc `<!-- QCODING:START -->` … `<!-- QCODING:END -->`).
+3. Un bouton « QCoding » apparaît dans l’interface de ton application pour ouvrir le dashboard.
+4. La mémoire se met à jour silencieusement au fil de la conversation.
 
-# Pourquoi Q-Coding ?
+---
 
-## Une mémoire qui accompagne le projet
+## Pourquoi Q-Coding ?
+
+### Une mémoire qui accompagne le projet
 
 Q-Coding est conçu pour éviter que le contexte d’un projet ne se perde dans le flux d’une conversation avec une IA.
 
@@ -52,11 +57,9 @@ Q-Coding les extrait de la conversation et les organise dans une mémoire struct
 
 Cette mémoire ne sert pas à remplacer le code ni à décider à la place du développeur. Elle permet de conserver les éléments qui expliquent comment et pourquoi le projet a évolué.
 
----
+### Le contexte reste avec le code
 
-## Le contexte reste avec le code
-
-En mode embarqué, la mémoire Q-Coding fait partie du projet lui-même.
+La mémoire Q-Coding fait partie du projet lui-même.
 
 Le fichier contient à la fois le code de l’application et les données structurées qui décrivent son contexte : exigences, bugs, décisions d’architecture et pistes différées.
 
@@ -64,9 +67,7 @@ La mémoire du projet peut ainsi accompagner le code au fil de son évolution, p
 
 Une reprise du développement peut alors s’appuyer sur le contexte présent dans le projet, même lorsque la conversation d’origine n’est plus disponible.
 
----
-
-## Aucune maintenance supplémentaire
+### Aucune maintenance supplémentaire
 
 Q-Coding est conçu pour fonctionner sans demander au développeur de tenir manuellement un registre du projet.
 
@@ -74,12 +75,10 @@ C’est l’IA qui observe la conversation et met à jour la mémoire structuré
 
 Le développeur peut ainsi continuer à travailler normalement avec son IA, sans avoir à maintenir en parallèle une documentation spécifique.
 
----
-
-## Ce que Q-Coding ne cherche pas à remplacer
+### Ce que Q-Coding ne cherche pas à remplacer
 
 Q-Coding ne remplace pas un système de gestion de versions ou un outil de documentation.
 
-Son rôle est plus ciblé : préserver dans le projet le contexte qui risque de se perdre au fil des échanges avec l’IA et contribuer à conserver l'intention et la solidité du lien entre l'intention et le code .
+Son rôle est plus ciblé : préserver dans le projet le contexte qui risque de se perdre au fil des échanges avec l’IA et contribuer à conserver l’intention et la solidité du lien entre l’intention et le code.
 
 Il constitue une mémoire structurée des éléments qui influencent l’évolution du code, tandis que le développeur reste maître de ses décisions.
