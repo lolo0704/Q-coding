@@ -20,6 +20,37 @@
      STYLES CSS STRICTEMENT SCOPÉS
      =========================================================== */
   const styles = `
+    #qc-app-host {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      z-index: 99999 !important;
+      overflow: hidden !important;
+      background: #0b0d13 !important;
+    }
+    #qc-btn-fermer {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      z-index: 100000;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 8px;
+      background: #2a3142;
+      color: #e6e8ec;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    #qc-btn-fermer:hover {
+      background: #e53e3e;
+      color: white;
+    }
     #qc-conteneur-global {
       --qc-fond: #0b0d13;
       --qc-surface: #141720;
@@ -374,6 +405,16 @@
     hostElement = host;
     host.replaceChildren();
     host.style.display = 'none'; // caché par défaut
+
+    // Bouton fermer
+    const btnFermer = document.createElement('button');
+    btnFermer.id = 'qc-btn-fermer';
+    btnFermer.innerHTML = '✕';
+    btnFermer.title = 'Fermer Q-Coding';
+    btnFermer.addEventListener('click', () => {
+      if (window.QCoding) window.QCoding.close();
+    });
+    host.appendChild(btnFermer);
 
     const conteneurGlobal = creerEl('div');
     conteneurGlobal.id = 'qc-conteneur-global';
