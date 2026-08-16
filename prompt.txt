@@ -138,6 +138,9 @@ Le bloc Q-Coding doit rester séparé du code applicatif. Maintiens uniquement l
 
 Le déclencheur d'affichage (bouton et logique d'ouverture/fermeture) fait partie de l'interface de l'application et doit être câblé avec le reste du code applicatif, pas à l'intérieur du bloc `QCODING:START`/`QCODING:END`.
 
+Le panneau Q-Coding s’ouvre en plein écran.
+Fermeture : bouton ✕, touche Échap, ou reclic sur le bouton « QCoding ».
+
 Utilise l'API publique de Q-Coding pour contrôler l'affichage :
 ```js
 // Ouvrir / fermer
