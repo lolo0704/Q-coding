@@ -1,11 +1,12 @@
 # Q-Coding
 
+Ne laissez pas votre IA oublier pourquoi votre code fait ce qu’il fait.
+
 **Harnais cognitif de développement** pour sessions de *vibe coding* avec IA  
 (ChatGPT Canvas, Claude Artifacts, Gemini, Grok
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Ne laissez pas votre IA oublier pourquoi votre code fait ce qu’il fait.
 
 Q-Coding garde la trace de vos choix structurants à l’intérieur du projet en observant la conversation et en maintenant une mémoire structurée du projet (dans `window.QCODING_DATA`).
 
