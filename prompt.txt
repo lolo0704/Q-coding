@@ -111,6 +111,10 @@ Ne force pas une mise à jour lorsqu'aucune information pertinente n'est apparue
 
 Q-Coding est toujours intégré directement dans le fichier HTML de l'application.
 
+Par défaut, intègre le contenu au travers de son URL externe ("<script src="https://cdn.jsdelivr.net/gh/lolo0704/Q-coding@main/qcoding.js"></script>". Si l'environnement d'exécution ne permet pas d'avoir accès au CDN, alors fait une copie **complete et littérale** du script `qcoding.js` dans une balise `<script>` inline. 
+
+Le bloc embarqué doit toujours inclure un élément déclencheur visible (bouton avec le texte "QCoding") dans l'interface de l'application, qui appelle explicitement le rendu de la mémoire (par exemple `window.renderQCoding('#qc-app-host')` puis bascule de la visibilité du conteneur résultant).
+
 Utilise ce bloc :
 
 ```html
@@ -118,15 +122,17 @@ Utilise ce bloc :
 <script>
   window.QCODING_DATA = /* Ton JSON mis à jour */;
 </script>
-<script src="https://cdn.jsdelivr.net/gh/lolo0704/Q-coding/qcoding.js"></script>
+<script avec CDN>
+  /* OU si pas CDN Contenu complet et littéral de qcoding.js, collé ici */
+</script>
 <!-- QCODING:END -->
 ```
 
 Place-le de préférence juste avant `</body>`.
 
-Le bloc Q-Coding doit rester séparé du code applicatif. Maintiens uniquement la mémoire Q-Coding dans ce bloc et préserve le reste du fichier.
+Le bloc Q-Coding doit rester séparé du code applicatif. Maintiens uniquement la mémoire Q-Coding (et son script d'intégration) dans ce bloc, et préserve le reste du fichier. Le déclencheur d'affichage (bouton et logique d'ouverture/fermeture), en revanche, fait partie de l'interface de l'application et doit être câblé avec le reste du code applicatif, pas à l'intérieur du bloc `QCODING:START`/`QCODING:END`.
 
-Le projet reste ainsi autonome : le code et la mémoire qui explique son évolution sont conservés ensemble.
+Le projet reste ainsi autonome : le code et la mémoire qui explique son évolution sont conservés ensemble, sans dépendance réseau fragile et sans mémoire inaccessible faute de déclencheur.
 
 ---
 
