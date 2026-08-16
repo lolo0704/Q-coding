@@ -29,9 +29,7 @@ Le développeur reste entièrement responsable de ses choix.
   - `[arch]` → Décisions d’architecture
   - `[ad]` → Pistes et refactorings différés
 - Dashboard visuel moderne (Vanilla JS, zéro dépendance)
-- Deux modes d’intégration :
-  - **Embarqué** : tout dans un seul fichier HTML (recommandé)
-  - **Standalone** : dashboard séparé
+- Q-Coding est intégré au fichier HTML vibe codé
 - IDs stables pour référencer facilement les éléments (`req1`, `bug2`…)
 - CSS strictement scopé (aucune pollution de la page hôte)
 
@@ -42,7 +40,7 @@ Le développeur reste entièrement responsable de ses choix.
 1. Copie le contenu de [`prompt.txt`](prompt.txt) dans ton IA.
 2. Le dashboard se met à jour automatiquement au fil de la conversation.
 
-# Pour en savoir plus sur les objectifs de Q-Coding
+# Pourquoi Q-Coding ?
 
 ## Une mémoire qui accompagne le projet
 
@@ -80,7 +78,7 @@ Le développeur peut ainsi continuer à travailler normalement avec son IA, sans
 
 ## Ce que Q-Coding ne cherche pas à remplacer
 
-Q-Coding ne remplace pas un système de gestion de versions ou de configuration, ou un outil de documentation.
+Q-Coding ne remplace pas un système de gestion de versions ou un outil de documentation.
 
 Son rôle est plus ciblé : préserver dans le projet le contexte qui risque de se perdre au fil des échanges avec l’IA et contribuer à conserver l'intention et la solidité du lien entre l'intention et le code .
 
