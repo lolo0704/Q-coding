@@ -74,14 +74,14 @@ Q-Coding est conçu pour fonctionner sans demander au développeur de tenir manu
 
 C’est l’IA qui observe la conversation et met à jour la mémoire structurée au fil des échanges.
 
-Le développeur peut ainsi continuer à travailler normalement avec son IA, sans avoir à maintenir en parallèle une documentation spécifique pour Q-Coding.
+Le développeur peut ainsi continuer à travailler normalement avec son IA, sans avoir à maintenir en parallèle une documentation spécifique.
 
 ---
 
 ## Ce que Q-Coding ne cherche pas à remplacer
 
-Q-Coding ne remplace pas un système de gestion de versions, un outil de suivi de projet ou la documentation complète d’une application.
+Q-Coding ne remplace pas un système de gestion de versions ou de configuration, ou un outil de documentation.
 
-Son rôle est plus ciblé : préserver dans le projet le contexte qui risque de se perdre au fil des échanges avec l’IA.
+Son rôle est plus ciblé : préserver dans le projet le contexte qui risque de se perdre au fil des échanges avec l’IA et contribuer à conserver l'intention et la solidité du lien entre l'intention et le code .
 
-Il constitue une mémoire structurée des éléments qui influencent l’évolution du code, tandis que le développeur reste responsable des décisions et de leur mise en œuvre.
+Il constitue une mémoire structurée des éléments qui influencent l’évolution du code, tandis que le développeur reste maître de ses décisions.
