@@ -2,7 +2,7 @@
 
 **Ne laissez pas votre IA oublier pourquoi votre code fait ce qu’il fait.**
 
-Q-Coding garde la trace de vos choix structurants à l’intérieur du projet.  
+Lors d'une séance de vibe-coding, Q-Coding garde la trace de vos choix structurants à l’intérieur du projet.  
 Il observe la conversation et maintient une mémoire structurée (`window.QCODING_DATA`).
 
 Harnais de développement *in-context*, activé par un simple prompt.  
