@@ -1,17 +1,19 @@
 # Q-Coding
 
 **Harnais cognitif de développement** pour sessions de *vibe coding* avec IA  
-(ChatGPT Canvas, Claude Artifacts, Gemini, Cursor…)
+(ChatGPT Canvas, Claude Artifacts, Gemini, Grok
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Q-Coding transforme ton IA en **copilote technique** qui observe la conversation et maintient une mémoire structurée du projet (`window.QCODING_DATA`), sans jamais diriger ni imposer.
+Ne laissez pas votre IA oublier pourquoi votre code fait ce qu’il fait.
+
+Q-Coding garde la trace de vos choix structurants à l’intérieur du projet en observant la conversation et en maintenant une mémoire structurée du projet (dans `window.QCODING_DATA`).
 
 ---
 
 ## Philosophie
 
-Q-Coding **observe**, il ne dirige pas.  
+Q-Coding **observe** et mémorise les échanges avec l'IA afin de consolider le projet.  
 Il capture ce qui a été dit (exigences, bugs, décisions d’architecture, pistes différées) et le structure dans un dashboard clair.  
 Le développeur reste entièrement responsable de ses choix.
 
@@ -36,8 +38,7 @@ Le développeur reste entièrement responsable de ses choix.
 ## Démarrage rapide
 
 1. Copie le contenu de [`prompt.txt`](prompt.txt) dans ton IA.
-2. Réponds aux questions d’amorce.
-3. Le dashboard se met à jour automatiquement au fil de la conversation.
+2. Le dashboard se met à jour automatiquement au fil de la conversation.
 
 ### Mode embarqué (recommandé pour HTML autonome)
 
