@@ -5,7 +5,7 @@
 Lors d'une séance de vibe-coding, Q-Coding garde la trace de vos choix structurants à l’intérieur du projet.  
 Il observe la conversation et maintient une mémoire structurée (`window.QCODING_DATA`).
 
-Harnais de développement *in-context*, activé par un simple prompt.  
+Q-Coding est un harnais de développement *in-context*, activé par un simple prompt.  
 Compatible avec **ChatGPT, Claude, Gemini et Grok**.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
