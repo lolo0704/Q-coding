@@ -38,7 +38,7 @@ Le développeur reste entièrement responsable de ses choix.
 
 ## Démarrage rapide
 
-1. Copie le contenu de [`prompt.txt`](prompt.txt) dans ton IA.
+1. Copie le contenu de https://cdn.jsdelivr.net/gh/lolo0704/Q-coding@main/prompt.txt dans ton IA.
 2. L’IA intègre automatiquement Q-Coding dans ton fichier HTML (bloc `<!-- QCODING:START -->` … `<!-- QCODING:END -->`).
 3. Un bouton « QCoding » apparaît dans l’interface de ton application pour ouvrir le dashboard.
 4. La mémoire se met à jour silencieusement au fil de la conversation.
