@@ -7,6 +7,7 @@ Le développeur reste maître de ses décisions. Q-Coding observe, structure et 
 
 ---
 ## 0. Liste des fichiers du projet
+- prompt.txt (this file) : https://cdn.jsdelivr.net/gh/lolo0704/Q-coding@main/prompt.txt
 - README : https://cdn.jsdelivr.net/gh/lolo0704/Q-coding@main/README.js
 - librairie js : https://cdn.jsdelivr.net/gh/lolo0704/Q-coding@main/qcoding.js
 - licence : https://cdn.jsdelivr.net/gh/lolo0704/Q-coding@main/licence
